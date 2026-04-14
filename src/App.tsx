@@ -21,11 +21,11 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg transition-transform hover:rotate-6 border border-slate-100 dark:border-slate-800">
+            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg transition-transform hover:rotate-6 border border-slate-100 dark:border-slate-800 bg-white">
               <img 
                 src="/Images/logo.jpeg" 
                 alt="VN Logo" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -278,11 +278,11 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group bg-white dark:bg-slate-900 rounded-[1.25rem] overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full"
     >
-      <div className="relative h-44 overflow-hidden shrink-0">
+      <div className="relative h-44 overflow-hidden shrink-0 bg-slate-50 dark:bg-slate-800/50">
         <img 
           src={service.image} 
           alt={service.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -350,11 +350,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           <div className="sm:col-span-2">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg border border-slate-800">
+              <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg border border-slate-800 bg-white">
                 <img 
                   src="/Images/logo.jpeg" 
                   alt="VN Logo" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
