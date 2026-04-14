@@ -23,7 +23,7 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg transition-transform hover:rotate-6 border border-slate-100 dark:border-slate-800 bg-white">
               <img 
-                src="/Images/logo.jpeg" 
+                src="/images/logo.jpeg" 
                 alt="VN Logo" 
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
@@ -352,7 +352,7 @@ const Footer = () => {
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg border border-slate-800 bg-white">
                 <img 
-                  src="/Images/logo.jpeg" 
+                  src="/images/logo.jpeg" 
                   alt="VN Logo" 
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
