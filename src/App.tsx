@@ -23,7 +23,7 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg transition-transform hover:rotate-6 border border-slate-100 dark:border-slate-800">
               <img 
-                src="https://storage.googleapis.com/firebasestorage.v0.appspot.com/o/applets%2F95e0c400-a2ae-410a-88fb-7992f531da9b%2Fattachments%2F1744631818224_logo.jpg?alt=media&token=e6638069-5f2c-4712-9844-3676878b273b" 
+                src="/Images/logo.jpeg" 
                 alt="VN Logo" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -352,7 +352,7 @@ const Footer = () => {
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg border border-slate-800">
                 <img 
-                  src="https://storage.googleapis.com/firebasestorage.v0.appspot.com/o/applets%2F95e0c400-a2ae-410a-88fb-7992f531da9b%2Fattachments%2F1744631818224_logo.jpg?alt=media&token=e6638069-5f2c-4712-9844-3676878b273b" 
+                  src="/Images/logo.jpeg" 
                   alt="VN Logo" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"

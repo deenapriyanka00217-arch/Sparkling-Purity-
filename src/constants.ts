@@ -12,7 +12,7 @@ export const SERVICES = [
     title: 'Home Cleaning',
     description: 'Complete deep cleaning for your residence, ensuring every corner sparkles.',
     icon: Home,
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6958?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Home Cleaning.png',
     keywords: ['home deep cleaning services in Iyyappanthangal Chennai', 'full house cleaning service near Porur Chennai', '2BHK house cleaning service Chennai price', 'professional home cleaning near me Thundalam', 'same day home cleaning service Chennai'],
   },
   {
@@ -20,7 +20,7 @@ export const SERVICES = [
     title: 'Kitchen Cleaning',
     description: 'Degreasing and sanitizing your kitchen surfaces, appliances, and cabinets.',
     icon: Utensils,
-    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Kitchen Cleaning.png',
     keywords: ['kitchen deep cleaning services Chennai near me', 'chimney and kitchen cleaning service Porur Chennai', 'grease removal kitchen cleaning Chennai', 'professional kitchen cleaning Iyyappanthangal', 'affordable kitchen cleaning service near Thundalam'],
   },
   {
@@ -28,7 +28,7 @@ export const SERVICES = [
     title: 'Office Cleaning',
     description: 'Professional cleaning for workspaces to maintain a healthy and productive environment.',
     icon: Briefcase,
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Office Cleaning.png',
     keywords: ['office cleaning services near me Chennai', 'commercial office cleaning Porur Chennai', 'corporate cleaning services Anna Nagar Chennai', 'daily office cleaning service Chennai cost', 'professional office cleaning company Chennai'],
   },
   {
@@ -36,7 +36,7 @@ export const SERVICES = [
     title: 'Bathroom Cleaning',
     description: 'Thorough disinfection and descaling of tiles, fixtures, and sanitary ware.',
     icon: Bath,
-    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Bathroom Cleaning.png',
     keywords: ['bathroom deep cleaning services Chennai near me', 'toilet cleaning service Iyyappanthangal Chennai', 'hard water stain removal bathroom Chennai', 'professional bathroom cleaning Porur', 'affordable bathroom cleaning service near me Chennai'],
   },
   {
@@ -44,7 +44,7 @@ export const SERVICES = [
     title: 'Sofa & Carpet Cleaning',
     description: 'Deep extraction cleaning to remove stains, dust, and allergens from upholstery.',
     icon: Sofa,
-    image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Sofa & Carpet Cleaning.png',
     keywords: ['sofa shampoo cleaning services Chennai', 'carpet cleaning service near Porur Chennai', 'sofa steam cleaning Iyyappanthangal Chennai', 'couch cleaning service near me Thundalam', 'professional sofa cleaning home service Chennai'],
   },
   {
@@ -52,7 +52,7 @@ export const SERVICES = [
     title: 'Terrace Cleaning',
     description: 'Removing moss, dirt, and debris from your terrace and outdoor areas.',
     icon: Landmark,
-    image: 'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Terrace Cleaning.png',
     keywords: ['terrace cleaning services Chennai near me', 'rooftop cleaning service Porur Chennai', 'water tank and terrace cleaning Chennai', 'terrace pressure washing Chennai service', 'professional terrace cleaning near Iyyappanthangal'],
   },
   {
@@ -60,7 +60,7 @@ export const SERVICES = [
     title: 'Mattress Cleaning',
     description: 'Sanitizing mattresses to eliminate dust mites and ensure a healthy sleep.',
     icon: Bed,
-    image: 'https://images.unsplash.com/photo-1505693419148-4071b56c889a?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Mattress Cleaning.png',
     keywords: ['mattress cleaning service at home Chennai', 'bed mattress shampoo cleaning Porur', 'dust mite removal mattress cleaning Chennai', 'professional mattress cleaning near me Chennai', 'same day mattress cleaning service Iyyappanthangal'],
   },
   {
@@ -68,7 +68,7 @@ export const SERVICES = [
     title: 'Over-head Tank Cleaning',
     description: 'Scientific cleaning and disinfection of water storage tanks for safe water.',
     icon: Droplets,
-    image: 'https://images.unsplash.com/photo-1585822719534-91182e85b401?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Over-head Tank Cleaning.png',
     keywords: ['overhead water tank cleaning Chennai near me', 'sump tank cleaning service Porur Chennai', 'drinking water tank cleaning Iyyappanthangal', 'underground tank cleaning Chennai service', 'professional water tank cleaning near Thundalam'],
   },
   {
@@ -76,7 +76,7 @@ export const SERVICES = [
     title: 'After Party Cleaning',
     description: 'Quick and efficient cleanup after events and parties so you can relax.',
     icon: PartyPopper,
-    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/After Party Cleaning.png',
     keywords: ['after party cleaning services Chennai', 'event cleaning service near Porur Chennai', 'post event cleaning company Chennai', 'house cleaning after function Iyyappanthangal', 'urgent cleaning service after party Chennai'],
   },
   {
@@ -84,7 +84,7 @@ export const SERVICES = [
     title: 'Restaurant Cleaning',
     description: 'Specialized cleaning for dining areas and commercial kitchens following hygiene standards.',
     icon: Store,
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Restaurant Cleaning.png',
     keywords: ['restaurant deep cleaning services Chennai', 'hotel kitchen cleaning Porur Chennai', 'commercial kitchen cleaning near me Chennai', 'food safety cleaning service Chennai restaurant', 'professional restaurant cleaning Iyyappanthangal'],
   },
   {
@@ -92,7 +92,7 @@ export const SERVICES = [
     title: 'Solar Panel Cleaning',
     description: 'Professional cleaning to maximize the efficiency and output of your solar panels.',
     icon: Sun,
-    image: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=800',
+    image: '/Images/Solar Panel Cleaning.png',
     keywords: ['solar panel cleaning services Chennai near me', 'rooftop solar cleaning Porur Chennai', 'solar panel maintenance service Iyyappanthangal', 'dust removal solar panels Chennai service', 'professional solar panel cleaning near Thundalam'],
   },
 ];
