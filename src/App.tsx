@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, MapPin, MessageCircle, ChevronRight, CheckCircle2, 
-  Star, Clock, ShieldCheck, ArrowUp, Menu, X 
+  Star, Clock, ShieldCheck, ArrowUp, Menu, X, ChevronDown 
 } from 'lucide-react';
 import { COMPANY_NAME, ADDRESS, PRIMARY_PHONE, SECONDARY_PHONE, WHATSAPP_NUMBER, SERVICES } from './constants';
+import { BannerSlider } from './components/BannerSlider';
 
 const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,12 +22,15 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg transition-transform hover:rotate-6 border border-slate-100 dark:border-slate-800 bg-white">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden transition-all hover:scale-105 group/logo bg-transparent">
               <img 
                 src="/images/logo.jpeg" 
                 alt="VN Logo" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover transition-transform group-hover/logo:scale-125 scale-[1.3]"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://picsum.photos/seed/clean/100/100';
+                }}
               />
             </div>
             <div className="hidden sm:block">
@@ -146,6 +150,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
+            className="flex flex-col items-center sm:items-start text-center sm:text-left"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-xs sm:text-sm font-semibold mb-6">
               <Star className="w-4 h-4 fill-rose-600 dark:fill-rose-400" />
@@ -158,7 +163,7 @@ const Hero = () => {
               Professional, reliable, and thorough cleaning services for your home and office. We bring the sparkle back to your environment with our expert team.
             </p>
             
-            <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-3 mb-8">
               {['Same Day Service', 'Affordable Price', 'Verified Professionals', 'Doorstep Service'].map((badge) => (
                 <span key={badge} className="px-3 py-1 rounded-lg bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 text-[10px] sm:text-xs font-bold border border-rose-100 dark:border-rose-800">
                   {badge}
@@ -166,20 +171,25 @@ const Hero = () => {
               ))}
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
               <a 
-                href="#services"
-                className="bg-rose-600 hover:bg-rose-700 text-white px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-rose-200 dark:shadow-none transition-all hover:-translate-y-1"
+                href={`tel:9710912592`}
+                className="w-fit sm:w-auto flex items-center gap-4 px-5 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md group/call"
               >
-                View Services
-                <ChevronRight className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-full bg-rose-50 dark:bg-rose-900/30 flex items-center justify-center shrink-0 group-hover/call:bg-rose-600 transition-colors">
+                  <Phone className="w-5 h-5 text-rose-600 dark:text-rose-400 group-hover/call:text-white transition-colors" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-tight">Primary No</p>
+                  <p className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">9710912592</p>
+                </div>
               </a>
-              <div className="flex items-center gap-4 px-6 py-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-                <div className="w-10 h-10 rounded-full bg-rose-50 dark:bg-rose-900/30 flex items-center justify-center">
+              <div className="w-fit sm:w-auto flex items-center gap-4 px-5 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+                <div className="w-10 h-10 rounded-full bg-rose-50 dark:bg-rose-900/30 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-rose-600 dark:text-rose-400" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Contact Us</p>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-tight">Contact Us</p>
                   <p className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">{SECONDARY_PHONE}</p>
                 </div>
               </div>
@@ -200,60 +210,24 @@ const Hero = () => {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative z-10 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl preserve-3d"
             >
-              <img 
-                src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=1200" 
-                alt="Professional Cleaning"
-                className="w-full h-[350px] sm:h-[550px] object-cover"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="w-full h-[350px] sm:h-[550px]">
+                <BannerSlider />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
               
               <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8">
                 <div className="glass-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-rose-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-rose-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shrink-0">
                       <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
                     <div>
-                      <p className="text-white font-bold text-base sm:text-lg">Premium Quality</p>
-                      <p className="text-rose-200 text-xs sm:text-sm">Professional Grade Equipment</p>
+                      <p className="text-slate-900 dark:text-white font-bold text-base sm:text-lg">Premium Quality</p>
+                      <p className="text-rose-600 dark:text-rose-300 text-xs sm:text-sm font-medium">Professional Grade Equipment</p>
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
-            
-            {/* 3D Floating Elements */}
-            <motion.div 
-              animate={{ 
-                y: [0, -20, 0],
-                rotateZ: [0, 5, 0]
-              }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 -right-4 sm:-top-10 sm:-right-10 z-20 glass-card p-3 sm:p-5 rounded-2xl sm:rounded-3xl shadow-2xl preserve-3d"
-            >
-              <div className="w-8 h-8 sm:w-12 sm:h-12 bg-green-500 rounded-lg sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3 shadow-lg shadow-green-200 dark:shadow-none">
-                <CheckCircle2 className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
-              </div>
-              <p className="font-bold text-slate-900 dark:text-white text-[10px] sm:text-sm">100% Satisfaction</p>
-              <p className="text-[8px] sm:text-xs text-slate-500 dark:text-slate-400">Guaranteed Result</p>
-            </motion.div>
-
-            <motion.div 
-              animate={{ 
-                y: [0, 20, 0],
-                rotateZ: [0, -5, 0]
-              }}
-              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-10 z-20 glass-card p-3 sm:p-5 rounded-2xl sm:rounded-3xl shadow-2xl preserve-3d"
-            >
-              <div className="flex items-center gap-0.5 sm:gap-1 mb-1 sm:mb-2">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <p className="font-bold text-slate-900 dark:text-white text-[10px] sm:text-sm">4.9/5 Rating</p>
-              <p className="text-[8px] sm:text-xs text-slate-500 dark:text-slate-400">Based on 500+ reviews</p>
             </motion.div>
           </motion.div>
         </div>
@@ -272,44 +246,47 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white dark:bg-slate-900 rounded-[1.25rem] overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full"
+      className="bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden border border-slate-100 dark:border-slate-800/10 shadow-xl flex flex-col w-full max-w-[320px] mx-auto group h-fit"
     >
-      <div className="relative h-44 overflow-hidden shrink-0 bg-slate-50 dark:bg-slate-800/50">
+      <div className="relative aspect-[1.4/1] overflow-hidden bg-slate-100 dark:bg-slate-800/20 shrink-0">
         <img 
           src={service.image} 
           alt={service.title}
-          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover object-top block transition-transform duration-700 group-hover:scale-105"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = 'https://picsum.photos/seed/' + service.id + '/800/600?blur=10';
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div className="absolute top-3 left-3">
-          <div className="w-8 h-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg text-rose-600 dark:text-rose-400">
-            <service.icon className="w-4 h-4" />
-          </div>
-        </div>
       </div>
       
-      <div className="p-5 flex flex-col flex-grow">
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1.5 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+      {/* Constant Price Bar to ensure uniform look across all cards */}
+      <div className="bg-rose-600 py-3 text-center border-b border-rose-700/20 flex-shrink-0">
+        <span className="text-[11px] font-black text-white uppercase tracking-[0.2em]">
+          {service.price || 'Price Based on Work'}
+        </span>
+      </div>
+      
+      <div className="p-6 flex flex-col text-center items-center justify-start bg-white dark:bg-slate-900">
+        <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight leading-tight mb-2 flex items-center justify-center">
           {service.title}
         </h3>
-        <p className="text-xs text-slate-600 dark:text-slate-400 mb-5 line-clamp-3 leading-relaxed">
+        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed line-clamp-3 px-1 mb-6">
           {service.description}
         </p>
 
-        <div className="mt-auto">
+        <div className="w-full">
           <a 
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition-all neon-shadow-whatsapp text-xs"
+            className="w-full bg-[#1AD03F] hover:bg-[#15b035] text-white py-4 rounded-xl font-black flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] uppercase tracking-widest shadow-lg shadow-green-100 dark:shadow-none"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
-            Book Now
+            <MessageCircle className="w-4 h-4 fill-white" />
+            Book Service
           </a>
         </div>
       </div>
@@ -319,19 +296,19 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
 
 const Services = () => {
   return (
-    <section id="services" className="py-12 bg-white dark:bg-slate-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-8">
-          <h2 className="text-rose-600 dark:text-rose-400 font-bold tracking-widest uppercase text-[10px] mb-2">Our Expertise</h2>
-          <h3 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">
-            Services We Provide
+    <section id="services" className="py-20 bg-white dark:bg-slate-950">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-rose-600 dark:text-rose-400 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs mb-3">Our Expertise</h2>
+          <h3 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
+            Premium Cleaning <span className="gradient-text">Solutions</span>
           </h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            We offer a wide range of professional cleaning solutions tailored to your specific needs. From residential to commercial, we handle it all.
+          <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+            Professional cleaning services tailored for your home, office, and industrial spaces. We bring the sparkle back.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {SERVICES.map((service, index) => (
             <div key={service.id}>
               <ServiceCard service={service} index={index} />
@@ -343,19 +320,141 @@ const Services = () => {
   );
 };
 
-const Footer = () => {
+const TESTIMONIALS = [
+  {
+    name: "Ravi",
+    role: "Home Owner",
+    content: "Fantastic service! My house is sparkling clean now. Highly recommended!",
+    rating: 5
+  },
+  {
+    name: "Priya",
+    role: "Apartment Resident",
+    content: "Very neat work. They arrived on time and finished everything perfectly without any supervision.",
+    rating: 5
+  },
+  {
+    name: "Manikandan",
+    role: "Business Owner",
+    content: "I am very satisfied with their cleaning. Their professional approach is impressive.",
+    rating: 5
+  },
+  {
+    name: "Deepa",
+    role: "Office Manager",
+    content: "My office is so clean now. The team was very efficient and thorough. Thank you!",
+    rating: 5
+  },
+  {
+    name: "Karthik",
+    role: "Home Owner",
+    content: "Excellent experience. The staff was very polite and professional throughout the process.",
+    rating: 5
+  },
+  {
+    name: "Anitha",
+    role: "Villa Owner",
+    content: "True value for money. They did a very thorough cleaning of every corner of my villa.",
+    rating: 5
+  },
+  {
+    name: "Suresh",
+    role: "Restaurant Owner",
+    content: "Hired them for a family function, they did a great job. Very reliable team.",
+    rating: 5
+  },
+  {
+    name: "Lakshmi",
+    role: "Apartment Resident",
+    content: "The sofa cleaning is amazing. It looks brand new again. Very happy with the result.",
+    rating: 5
+  },
+  {
+    name: "Vignesh",
+    role: "IT Professional",
+    content: "Definitely the best cleaning service in Chennai. Professional grade equipment and great service.",
+    rating: 5
+  },
+  {
+    name: "Meena",
+    role: "Home Maker",
+    content: "They were very responsible and did a great job cleaning. The house feels fresh and neat.",
+    rating: 5
+  }
+];
+
+const Testimonials = () => {
   return (
-    <footer id="contact" className="bg-slate-900 dark:bg-[#020617] text-white pt-24 pb-12">
+    <section className="py-24 bg-white dark:bg-[#020617] overflow-hidden border-t border-slate-100 dark:border-slate-800/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="text-center">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mb-4">
+            What Our <span className="gradient-text">Happy Clients</span> Say
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            Real feedback from our valued customers across Chennai who have experienced our premium cleaning services.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative flex overflow-hidden">
+        <motion.div 
+          animate={{ x: [0, -2500] }}
+          transition={{ 
+            duration: 60, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+          className="flex gap-6 whitespace-nowrap"
+        >
+          {[...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+            <div 
+              key={i} 
+              className="w-[320px] sm:w-[450px] flex-shrink-0 bg-slate-50 dark:bg-slate-900/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1"
+            >
+              <div className="flex gap-1 mb-4 text-amber-400">
+                {[...Array(t.rating)].map((_, idx) => (
+                  <Star key={idx} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
+              <p className="text-slate-700 dark:text-slate-200 text-lg sm:text-xl font-medium leading-relaxed mb-6 whitespace-normal italic">
+                "{t.content}"
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-rose-200 dark:shadow-none">
+                  {t.name[0]}
+                </div>
+                <div>
+                  <h6 className="font-bold text-slate-900 dark:text-white text-base">{t.name}</h6>
+                  <p className="text-[10px] text-rose-600 dark:text-rose-400 font-bold uppercase tracking-widest">{t.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Footer = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  return (
+    <footer id="contact" className="bg-slate-900 dark:bg-[#020617] text-white pt-16 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div className="sm:col-span-2">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg border border-slate-800 bg-white">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-8 text-center sm:text-left">
+              <div className="w-16 h-16 rounded-xl overflow-hidden transition-all hover:scale-110 bg-transparent shadow-none border-none">
                 <img 
                   src="/images/logo.jpeg" 
                   alt="VN Logo" 
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover scale-[1.3]"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://picsum.photos/seed/clean/100/100';
+                  }}
                 />
               </div>
               <div>
@@ -363,26 +462,60 @@ const Footer = () => {
                 <p className="text-xs sm:text-sm text-rose-400 font-semibold tracking-wider uppercase">Sparkling Purity</p>
               </div>
             </div>
-            <p className="text-slate-400 text-base sm:text-lg mb-10 max-w-md leading-relaxed">
+            <p className="text-slate-400 text-base sm:text-lg mb-10 max-w-md mx-auto sm:mx-0 leading-relaxed">
               Your trusted partner for professional cleaning services in Chennai. We are committed to delivering excellence and ensuring your spaces are spotless and hygienic.
             </p>
-            <div className="flex gap-4">
-              {[Star, Clock, ShieldCheck].map((Icon, i) => (
-                <div key={i} className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center hover:bg-rose-600 transition-all cursor-pointer group">
-                  <Icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                </div>
-              ))}
-            </div>
           </div>
 
-          <div>
-            <h5 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Quick Links</h5>
-            <ul className="space-y-3 sm:space-y-4 text-slate-400">
+          <div className="relative">
+            <div 
+              className="flex items-center justify-between mb-6 sm:mb-8 cursor-pointer group"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <h5 className="text-lg sm:text-xl font-bold group-hover:text-rose-400 transition-colors">Quick Links</h5>
+              <button 
+                className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-rose-600 transition-all"
+                aria-label="Toggle age keywords"
+              >
+                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+            
+            <ul className="space-y-3 sm:space-y-4 text-slate-400 mb-8">
               <li><a href="#" className="hover:text-rose-400 transition-colors flex items-center gap-2"><ChevronRight className="w-4 h-4" /> Home</a></li>
               <li><a href="#about" className="hover:text-rose-400 transition-colors flex items-center gap-2"><ChevronRight className="w-4 h-4" /> About Us</a></li>
               <li><a href="#services" className="hover:text-rose-400 transition-colors flex items-center gap-2"><ChevronRight className="w-4 h-4" /> Services</a></li>
               <li><a href="#contact" className="hover:text-rose-400 transition-colors flex items-center gap-2"><ChevronRight className="w-4 h-4" /> Contact</a></li>
             </ul>
+
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="p-5 rounded-2xl bg-slate-800/80 border border-slate-700 shadow-2xl backdrop-blur-sm"
+                >
+                  <div className="space-y-3">
+                    <p className="text-xs font-bold text-rose-400 uppercase tracking-widest border-b border-slate-700 pb-2">Age Identity</p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" />
+                        <p className="text-[11px] text-slate-300 leading-tight">Professional cleaning solutions catering to all age groups.</p>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" />
+                        <p className="text-[11px] text-slate-300 leading-tight">Specialized sanitization for kids and elderly-friendly environments.</p>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" />
+                        <p className="text-[11px] text-slate-300 leading-tight">Advanced agents safe for multi-generational homes.</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div>
@@ -409,47 +542,23 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Popular Searches Section */}
-        <div className="border-t border-slate-800/10 py-16">
-          <h5 className="text-2xl font-bold mb-12">Popular Searches</h5>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-            {SERVICES.map((service) => (
-              <div key={service.id} className="flex flex-col">
-                <h6 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-rose-600"></div>
-                  {service.title}
-                </h6>
-                <ul className="space-y-2.5">
-                  {service.keywords?.map((keyword, index) => (
-                    <li 
-                      key={index} 
-                      className="text-[10px] text-slate-500 hover:text-rose-400 transition-colors cursor-default leading-relaxed"
-                    >
-                      {keyword}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="border-t border-slate-800/10 pt-12">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex gap-2 text-slate-500 text-sm">
-              <span>designed by</span>
+          <div className="flex flex-col items-center gap-6 text-center">
+            <p className="text-slate-500 text-sm">
+              © {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-1 text-slate-500 text-sm font-medium justify-center">
+              <span>designed with care by</span>
               <a 
                 href="https://share.google/UEdnMPbQAsCSNWyfi" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-rose-400 transition-colors font-medium"
+                className="text-rose-400 hover:text-rose-300 transition-colors flex items-center justify-center gap-1"
               >
                 my-dp.digital
+                <div className="w-1 h-1 rounded-full bg-rose-400 animate-pulse"></div>
               </a>
             </div>
-            <p className="text-slate-500 text-sm">
-              © {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
-            </p>
           </div>
         </div>
       </div>
@@ -621,6 +730,8 @@ export default function App() {
 
         <Services />
         
+        <Testimonials />
+
         {/* CTA Section */}
         <section className="py-16 bg-slate-50 dark:bg-slate-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -629,28 +740,18 @@ export default function App() {
               <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-400/20 rounded-full -ml-48 -mb-48 blur-3xl"></div>
               
               <div className="relative z-10 max-w-3xl mx-auto">
-                <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
-                  Ready to Make Your Space Shine?
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-10 leading-relaxed uppercase tracking-wide">
+                  Experience the best professional cleaning service in Chennai today.
                 </h2>
-                <p className="text-rose-100 text-lg mb-8 leading-relaxed">
-                  Contact us today for a free quote and experience the best cleaning service in Chennai.
-                </p>
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <div className="flex justify-center">
                   <a 
                     href={`https://wa.me/${WHATSAPP_NUMBER}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-white text-rose-600 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-3"
+                    className="w-fit bg-white text-rose-600 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-3 whitespace-nowrap"
                   >
-                    <MessageCircle className="w-6 h-6" />
+                    <MessageCircle className="w-5 h-5 shrink-0" />
                     Chat on WhatsApp
-                  </a>
-                  <a 
-                    href={`tel:${PRIMARY_PHONE}`}
-                    className="bg-rose-800/50 text-white border border-rose-400/30 backdrop-blur-sm px-8 py-4 rounded-2xl font-bold text-lg hover:bg-rose-800 transition-all flex items-center justify-center gap-3"
-                  >
-                    <Phone className="w-6 h-6" />
-                    Call Us Now
                   </a>
                 </div>
               </div>
