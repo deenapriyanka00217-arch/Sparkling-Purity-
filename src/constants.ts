@@ -94,6 +94,7 @@ export const SERVICES = [
     description: 'Professional cleaning to maximize the efficiency and output of your solar panels.',
     icon: Sun,
     image: '/images/Solar Panel Cleaning.png',
+    price: 'Starts from ₹99',
     keywords: ['solar panel cleaning services Chennai near me', 'rooftop solar cleaning Porur Chennai', 'solar panel maintenance service Iyyappanthangal', 'dust removal solar panels Chennai service', 'professional solar panel cleaning near Thundalam'],
   },
 ];

@@ -22,11 +22,11 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden transition-all hover:scale-105 group/logo bg-transparent">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden flex items-center justify-center transition-all hover:scale-105 group/logo">
               <img 
                 src="/images/logo.jpeg" 
                 alt="VN Logo" 
-                className="w-full h-full object-cover transition-transform group-hover/logo:scale-125 scale-[1.3]"
+                className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://picsum.photos/seed/clean/100/100';
@@ -446,11 +446,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div className="sm:col-span-2">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-8 text-center sm:text-left">
-              <div className="w-16 h-16 rounded-xl overflow-hidden transition-all hover:scale-110 bg-transparent shadow-none border-none">
+              <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center transition-all hover:scale-110">
                 <img 
                   src="/images/logo.jpeg" 
                   alt="VN Logo" 
-                  className="w-full h-full object-cover scale-[1.3]"
+                  className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = 'https://picsum.photos/seed/clean/100/100';
