@@ -437,6 +437,138 @@ const Testimonials = () => {
   );
 };
 
+const BeforeAfter = () => {
+  const results = Array.from({ length: 12 }, (_, i) => `/images/results/result_${i + 1}.png`);
+
+  return (
+    <section className="py-24 bg-white dark:bg-[#020617] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="text-center">
+          <h2 className="text-rose-600 dark:text-rose-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-4">Our Transformations</h2>
+          <h3 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
+            Before & <span className="gradient-text">After</span>
+          </h3>
+          <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Witness the difference our professional cleaning makes. From deep-seated dust to sparkling surfaces.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative flex overflow-hidden">
+        <motion.div 
+          animate={{ x: [0, -3000] }}
+          transition={{ 
+            duration: 50, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+          className="flex gap-6 whitespace-nowrap"
+        >
+          {[...results, ...results, ...results].map((img, i) => (
+            <div 
+              key={i} 
+              className="w-[280px] sm:w-[350px] flex-shrink-0"
+            >
+              <div className="aspect-square rounded-[2rem] overflow-hidden border border-slate-100 dark:border-slate-800 shadow-xl bg-slate-50">
+                <img 
+                  src={img} 
+                  alt={`Clean Result ${i}`}
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://picsum.photos/seed/clean${i % 12}/800/800`;
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Equipment = () => {
+  const equipmentImages = [
+    '/images/equipment/equipment_1.png',
+    '/images/equipment/equipment_2.png',
+  ];
+
+  return (
+    <section className="py-24 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800/10 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center">
+          {/* Left Side: Content */}
+          <div className="text-left order-2 lg:order-1">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-rose-600 dark:text-rose-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-4">Professional Gear</h2>
+              <h3 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
+                Equipment's We <br/><span className="gradient-text">used for</span>
+              </h3>
+              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-lg font-medium">
+                We invest in high-grade professional equipment from leading brands to ensure the most effective and thorough cleaning results. From heavy-duty scrubbers to high-suction vacuums, we use the best tools for optimal hygiene.
+              </p>
+              
+              <div className="flex flex-col gap-4">
+                {[
+                  "Industrial Grade Floor Scrubbers",
+                  "High-Suction Dry & Wet Vacuums",
+                  "Professional Steam Sanitizers",
+                  "Deep Extraction Upholstery Cleaners"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-rose-600" />
+                    </div>
+                    <span className="text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm uppercase tracking-widest">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Side: Carousel/Scroll Images */}
+          <div className="relative order-1 lg:order-2">
+            <div className="flex overflow-hidden rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-800">
+              <motion.div 
+                animate={{ x: [0, -400 * equipmentImages.length] }}
+                transition={{ 
+                  duration: 15, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }}
+                className="flex"
+              >
+                {[...equipmentImages, ...equipmentImages, ...equipmentImages].map((img, i) => (
+                  <div key={i} className="w-[300px] sm:w-[450px] aspect-[4/3] flex-shrink-0">
+                    <img 
+                      src={img} 
+                      alt={`Equipment ${i}`}
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&q=80&w=800';
+                      }}
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+            
+            {/* Visual Decoration */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-rose-400/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Footer = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -729,6 +861,10 @@ export default function App() {
         </section>
 
         <Services />
+        
+        <BeforeAfter />
+        
+        <Equipment />
         
         <Testimonials />
 
