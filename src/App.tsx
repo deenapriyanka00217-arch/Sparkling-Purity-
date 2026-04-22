@@ -24,7 +24,7 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden flex items-center justify-center transition-all hover:scale-105 group/logo">
               <img 
-                src="/images/logo.jpeg" 
+                src="images/logo.jpeg" 
                 alt="VN Logo" 
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
@@ -439,7 +439,7 @@ const Testimonials = () => {
 
 const BeforeAfter = () => {
   const [isPaused, setIsPaused] = useState(false);
-  const results = Array.from({ length: 14 }, (_, i) => `/images/results/${i + 1}.png`);
+  const results = Array.from({ length: 14 }, (_, i) => `images/results/${i + 1}.png`);
 
   return (
     <section className="py-24 bg-white dark:bg-[#020617] overflow-hidden">
@@ -501,8 +501,8 @@ const BeforeAfter = () => {
 const Equipment = () => {
   const [isPaused, setIsPaused] = useState(false);
   const equipmentImages = [
-    '/images/equipment/15.png',
-    '/images/equipment/16.png',
+    'images/equipment/15.png',
+    'images/equipment/16.png',
   ];
 
   const scrollRef = useState(0); // Using this to trigger re-renders if needed for manual nav
@@ -594,7 +594,7 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-8 text-center sm:text-left">
               <div className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center transition-all hover:scale-110">
                 <img 
-                  src="/images/logo.jpeg" 
+                  src="images/logo.jpeg" 
                   alt="VN Logo" 
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"

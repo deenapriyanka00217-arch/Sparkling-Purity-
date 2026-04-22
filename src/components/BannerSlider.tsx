@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 const images = [
-  '/images/Banner_0.png',
-  '/images/Banner_1.png'
+  'images/Banner_0.png',
+  'images/Banner_1.png'
 ];
 
 export const BannerSlider = () => {
