@@ -438,7 +438,7 @@ const Testimonials = () => {
 };
 
 const BeforeAfter = () => {
-  const results = Array.from({ length: 12 }, (_, i) => `/images/results/result_${i + 1}.png`);
+  const results = Array.from({ length: 14 }, (_, i) => `/images/results/${i + 1}.png`);
 
   return (
     <section className="py-24 bg-white dark:bg-[#020617] overflow-hidden">
@@ -490,8 +490,8 @@ const BeforeAfter = () => {
 
 const Equipment = () => {
   const equipmentImages = [
-    '/images/equipment/equipment_1.png',
-    '/images/equipment/equipment_2.png',
+    '/images/equipment/15.png',
+    '/images/equipment/16.png',
   ];
 
   return (
