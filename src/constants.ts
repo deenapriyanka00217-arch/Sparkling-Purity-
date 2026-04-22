@@ -22,7 +22,7 @@ export const SERVICES = [
     description: 'Specialized kitchen cleaning with steam machine for deep degreasing and sanitizing surfaces, appliances, and cabinets.',
     icon: Utensils,
     image: '/images/Kitchen Cleaning.png',
-    price: 'Starts from ₹999',
+    price: 'Starts from ₹99',
     keywords: ['kitchen deep cleaning services Chennai near me', 'chimney and kitchen cleaning service Porur Chennai', 'grease removal kitchen cleaning Chennai', 'professional kitchen cleaning Iyyappanthangal', 'affordable kitchen cleaning service near Thundalam'],
   },
   {

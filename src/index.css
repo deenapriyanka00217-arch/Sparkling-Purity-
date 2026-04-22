@@ -27,6 +27,16 @@
   }
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-cyan-500 dark:from-rose-400 dark:to-cyan-300;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Phone, MapPin, MessageCircle, ChevronRight, CheckCircle2, 
+  Phone, MapPin, MessageCircle, ChevronRight, ChevronLeft, CheckCircle2, 
   Star, Clock, ShieldCheck, ArrowUp, Menu, X, ChevronDown 
 } from 'lucide-react';
 import { COMPANY_NAME, ADDRESS, PRIMARY_PHONE, SECONDARY_PHONE, WHATSAPP_NUMBER, SERVICES } from './constants';
@@ -33,11 +33,11 @@ const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => v
                 }}
               />
             </div>
-            <div className="hidden sm:block">
-              <h1 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">
+            <div className="block">
+              <h1 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">
                 Sparkling Purity
               </h1>
-              <p className="text-[10px] font-semibold text-rose-600 dark:text-rose-400 tracking-wider uppercase">
+              <p className="text-[9px] sm:text-[10px] font-semibold text-rose-600 dark:text-rose-400 tracking-wider uppercase">
                 Cleaning Service
               </p>
             </div>
@@ -156,7 +156,7 @@ const Hero = () => {
               <Star className="w-4 h-4 fill-rose-600 dark:fill-rose-400" />
               <span>#1 Cleaning Service in Chennai</span>
             </div>
-            <h2 className="text-4xl sm:text-7xl font-extrabold text-slate-900 dark:text-white leading-[1.1] mb-6">
+            <h2 className="text-3xl sm:text-7xl font-extrabold text-slate-900 dark:text-white leading-[1.1] mb-6">
               Experience the Joy of a <span className="gradient-text">Sparkling Clean</span> Space
             </h2>
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-lg leading-relaxed">
@@ -438,6 +438,7 @@ const Testimonials = () => {
 };
 
 const BeforeAfter = () => {
+  const [isPaused, setIsPaused] = useState(false);
   const results = Array.from({ length: 14 }, (_, i) => `/images/results/${i + 1}.png`);
 
   return (
@@ -448,35 +449,44 @@ const BeforeAfter = () => {
           <h3 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
             Before & <span className="gradient-text">After</span>
           </h3>
-          <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed px-4">
             Witness the difference our professional cleaning makes. From deep-seated dust to sparkling surfaces.
           </p>
         </div>
       </div>
 
-      <div className="relative flex overflow-hidden">
+      <div 
+        className="relative flex overflow-hidden select-none"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+      >
         <motion.div 
-          animate={{ x: [0, -3000] }}
+          drag="x"
+          dragConstraints={{ left: -350 * 14, right: 0 }}
+          animate={isPaused ? undefined : { x: [0, -350 * 14] }}
           transition={{ 
             duration: 50, 
             repeat: Infinity, 
             ease: "linear" 
           }}
-          className="flex gap-6 whitespace-nowrap"
+          className="flex gap-6 whitespace-nowrap cursor-grab active:cursor-grabbing"
         >
           {[...results, ...results, ...results].map((img, i) => (
             <div 
               key={i} 
-              className="w-[280px] sm:w-[350px] flex-shrink-0"
+              className="w-[280px] sm:w-[350px] flex-shrink-0 pointer-events-none"
             >
-              <div className="aspect-square rounded-[2rem] overflow-hidden border border-slate-100 dark:border-slate-800 shadow-xl bg-slate-50">
+              <div className="aspect-square rounded-[2rem] overflow-hidden border border-slate-100 dark:border-slate-800 shadow-xl bg-slate-50 pointer-events-auto">
                 <img 
                   src={img} 
-                  alt={`Clean Result ${i}`}
-                  className="w-full h-full object-cover"
+                  alt={`Clean Result ${i + 1}`}
+                  className="w-full h-full object-cover pointer-events-none"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://picsum.photos/seed/clean${i % 12}/800/800`;
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
                   }}
                 />
               </div>
@@ -489,79 +499,83 @@ const BeforeAfter = () => {
 };
 
 const Equipment = () => {
+  const [isPaused, setIsPaused] = useState(false);
   const equipmentImages = [
     '/images/equipment/15.png',
     '/images/equipment/16.png',
   ];
 
+  const scrollRef = useState(0); // Using this to trigger re-renders if needed for manual nav
+
   return (
-    <section className="py-24 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800/10 overflow-hidden">
+    <section id="equipment" className="py-20 sm:py-24 bg-white dark:bg-[#020617] border-t border-slate-100 dark:border-slate-800/10 block overflow-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center">
-          {/* Left Side: Content */}
-          <div className="text-left order-2 lg:order-1">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-rose-600 dark:text-rose-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-4">Professional Gear</h2>
-              <h3 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
-                Equipment's We <br/><span className="gradient-text">used for</span>
-              </h3>
-              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-lg font-medium">
-                We invest in high-grade professional equipment from leading brands to ensure the most effective and thorough cleaning results. From heavy-duty scrubbers to high-suction vacuums, we use the best tools for optimal hygiene.
-              </p>
-              
-              <div className="flex flex-col gap-4">
-                {[
-                  "Industrial Grade Floor Scrubbers",
-                  "High-Suction Dry & Wet Vacuums",
-                  "Professional Steam Sanitizers",
-                  "Deep Extraction Upholstery Cleaners"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="w-5 h-5 text-rose-600" />
-                    </div>
-                    <span className="text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm uppercase tracking-widest">{item}</span>
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
+          
+          {/* Text Content */}
+          <div className="w-full text-center lg:text-left block opacity-100 visible">
+            <h2 className="text-rose-600 font-bold tracking-widest uppercase text-xs sm:text-sm mb-4 block">
+              Professional Gear
+            </h2>
+            <h1 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight block">
+              Equipment's We <span className="text-rose-600">Used For</span>
+            </h1>
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium block">
+              We invest in high-grade professional equipment from leading brands to ensure the most effective and thorough cleaning results. From heavy-duty scrubbers to high-suction vacuums, we use the best tools for optimal hygiene.
+            </p>
+            
+            <div className="space-y-4 max-w-sm mx-auto lg:mx-0 text-left block">
+              {[
+                "Industrial Grade Floor Scrubbers",
+                "High-Suction Dry & Wet Vacuums",
+                "Professional Steam Sanitizers",
+                "Deep Extraction Upholstery Cleaners"
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 shadow-md flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700">
+                    <CheckCircle2 className="w-6 h-6 text-rose-600" />
                   </div>
-                ))}
-              </div>
-            </motion.div>
+                  <span className="text-slate-900 dark:text-white font-bold text-xs sm:text-sm uppercase tracking-widest leading-tight">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Right Side: Carousel/Scroll Images */}
-          <div className="relative order-1 lg:order-2">
-            <div className="flex overflow-hidden rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-800">
+          {/* Carousel Column */}
+          <div 
+            className="w-full relative mt-12 lg:mt-0 block overflow-hidden select-none"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            <div className="overflow-hidden mb-0 cursor-grab active:cursor-grabbing w-full">
               <motion.div 
-                animate={{ x: [0, -400 * equipmentImages.length] }}
+                drag="x"
+                dragConstraints={{ left: -1500, right: 0 }}
+                animate={isPaused ? undefined : { x: [0, -2000] }}
                 transition={{ 
-                  duration: 15, 
+                  duration: 40, 
                   repeat: Infinity, 
                   ease: "linear" 
                 }}
-                className="flex"
+                className="flex gap-6 w-max"
               >
-                {[...equipmentImages, ...equipmentImages, ...equipmentImages].map((img, i) => (
-                  <div key={i} className="w-[300px] sm:w-[450px] aspect-[4/3] flex-shrink-0">
-                    <img 
-                      src={img} 
-                      alt={`Equipment ${i}`}
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&q=80&w=800';
-                      }}
-                    />
+                {[...equipmentImages, ...equipmentImages, ...equipmentImages, ...equipmentImages].map((img, i) => (
+                  <div key={i} className="flex-shrink-0 w-[260px] sm:w-[450px] pointer-events-none">
+                    <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-800 p-6 sm:p-10 pointer-events-auto">
+                      <img 
+                        src={img} 
+                        alt="Cleaning Equipment"
+                        className="w-full h-auto object-contain rounded-2xl pointer-events-none"
+                      />
+                    </div>
                   </div>
                 ))}
               </motion.div>
             </div>
-            
-            {/* Visual Decoration */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-rose-400/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none"></div>
           </div>
         </div>
       </div>
@@ -729,7 +743,7 @@ const FloatingButtons = () => {
         rel="noopener noreferrer"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-16 h-16 bg-green-500 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-green-600 transition-all hover:-translate-y-1 active:scale-95 group relative"
+        className="w-16 h-16 bg-[#FFD700] text-slate-900 rounded-full shadow-[0_0_20px_rgba(255,215,0,0.6)] hover:shadow-[0_0_30px_rgba(37,211,102,0.8)] hover:bg-[#25D366] hover:text-white transition-all hover:-translate-y-1 active:scale-95 group relative border-2 border-[#FFD700] hover:border-[#25D366] flex items-center justify-center font-bold"
       >
         <svg 
           viewBox="0 0 24 24" 
@@ -785,55 +799,55 @@ export default function App() {
           <p>We serve Iyyappanthangal, Thundalam, Porur, Kattupakkam, Valasaravakkam, Anna Nagar, Poonamallee, and Kundrathur.</p>
           <p>Same day service Chennai, affordable price, verified professionals, doorstep service.</p>
         </section>
-        <section id="about" className="py-16 sm:py-24 bg-white dark:bg-slate-950">
+        <section id="about" className="py-16 sm:py-24 bg-white dark:bg-slate-950 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 sm:gap-20 items-center">
               <div className="relative order-2 lg:order-1">
-                <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                  <div className="space-y-4 sm:space-y-6">
-                    <div className="p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-rose-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg shadow-rose-200 dark:shadow-none">
-                        <Star className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-6">
+                  <div className="space-y-6 sm:space-y-6">
+                    <div className="p-8 sm:p-8 rounded-[2.5rem] bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 text-center sm:text-left shadow-sm">
+                      <div className="w-14 h-14 bg-rose-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-rose-200 dark:shadow-none mx-auto sm:mx-0">
+                        <Star className="w-7 h-7 text-white" />
                       </div>
-                      <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3">Expert Team</h4>
-                      <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">Trained professionals with years of experience in deep cleaning.</p>
+                      <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Expert Team</h4>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Trained professionals with years of experience in deep cleaning.</p>
                     </div>
-                    <div className="p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-slate-900 dark:bg-slate-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
-                        <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                    <div className="p-8 sm:p-8 rounded-[2.5rem] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 text-center sm:text-left shadow-sm">
+                      <div className="w-14 h-14 bg-slate-900 dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6 shadow-lg mx-auto sm:mx-0">
+                        <ShieldCheck className="w-7 h-7 text-white" />
                       </div>
-                      <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3">Safe & Secure</h4>
-                      <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">Eco-friendly products and safe cleaning methods for your family.</p>
+                      <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Safe & Secure</h4>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Eco-friendly products and safe cleaning methods for your family.</p>
                     </div>
                   </div>
-                  <div className="space-y-4 sm:space-y-6 mt-8 sm:mt-12">
-                    <div className="p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-slate-900 dark:bg-slate-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
-                        <Clock className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                  <div className="space-y-6 sm:space-y-6 lg:mt-12">
+                    <div className="p-8 sm:p-8 rounded-[2.5rem] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 text-center sm:text-left shadow-sm">
+                      <div className="w-14 h-14 bg-slate-900 dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6 shadow-lg mx-auto sm:mx-0">
+                        <Clock className="w-7 h-7 text-white" />
                       </div>
-                      <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3">On Time</h4>
-                      <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">We value your time and always arrive exactly as scheduled.</p>
+                      <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">On Time</h4>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">We value your time and always arrive exactly as scheduled.</p>
                     </div>
-                    <div className="p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg shadow-green-200 dark:shadow-none">
-                        <CheckCircle2 className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                    <div className="p-8 sm:p-8 rounded-[2.5rem] bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 text-center sm:text-left shadow-sm">
+                      <div className="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-200 dark:shadow-none mx-auto sm:mx-0">
+                        <CheckCircle2 className="w-7 h-7 text-white" />
                       </div>
-                      <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3">Best Prices</h4>
-                      <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">Competitive pricing with no hidden charges or surprises.</p>
+                      <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Best Prices</h4>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Competitive pricing with no hidden charges or surprises.</p>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div className="order-1 lg:order-2">
+              <div className="order-1 lg:order-2 text-center lg:text-left px-4 sm:px-0">
                 <h2 className="text-rose-600 dark:text-rose-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-4">About Our Company</h2>
-                <h3 className="text-3xl sm:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 sm:mb-8 leading-tight">
+                <h3 className="text-2xl sm:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 sm:mb-8 leading-tight">
                   We Don't Just Clean, We <span className="gradient-text">Care</span> For Your Space
                 </h3>
-                <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 sm:mb-10 leading-relaxed">
+                <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                   Our mission is to provide a clean and healthy environment for our customers. We use the latest technology and high-quality cleaning agents to ensure the best results every time.
                 </p>
-                <div className="space-y-4 sm:space-y-6">
+                <div className="space-y-4 sm:space-y-6 max-w-md mx-auto lg:mx-0">
                   {[
                     "Eco-friendly cleaning solutions",
                     "Customized cleaning plans",
@@ -876,7 +890,7 @@ export default function App() {
               <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-400/20 rounded-full -ml-48 -mb-48 blur-3xl"></div>
               
               <div className="relative z-10 max-w-3xl mx-auto">
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-10 leading-relaxed uppercase tracking-wide">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-10 leading-relaxed tracking-wide">
                   Experience the best professional cleaning service in Chennai today.
                 </h2>
                 <div className="flex justify-center">
@@ -884,7 +898,7 @@ export default function App() {
                     href={`https://wa.me/${WHATSAPP_NUMBER}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-fit bg-white text-rose-600 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-3 whitespace-nowrap"
+                    className="w-fit bg-[#FFD700] text-slate-900 px-8 py-4 rounded-2xl font-bold text-lg shadow-[0_0_20px_rgba(255,215,0,0.6)] hover:shadow-[0_0_30px_rgba(37,211,102,0.8)] hover:bg-[#25D366] hover:text-white transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3 whitespace-nowrap border-2 border-[#FFD700] hover:border-[#25D366]"
                   >
                     <MessageCircle className="w-5 h-5 shrink-0" />
                     Chat on WhatsApp
